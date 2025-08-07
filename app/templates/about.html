@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | House of Mary & Joseph</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <style>
+    .about-section {
+      padding: 5rem 10%;
+      background: var(--light);
+      text-align: center;
+    }
+
+    .about-wrapper {
+      background: #edf2f7;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .about-section h2 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+
+    .about-section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-highlight {
+      background: #fff;
+      border-left: 5px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 2rem auto;
+      font-style: italic;
+      max-width: 700px;
+    }
+
+    .audio-section {
+      margin-top: 4rem;
+    }
+
+    .audio-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .audio-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .audio-section audio {
+      width: 100%;
+      max-width: 500px;
+      outline: none;
+    }
+
+    footer {
+      background: #1a365d;
+      color: var(--light);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <section class="about-section">
+    <div class="about-wrapper">
+      <h2>Our Story</h2>
+      <p>
+        Jericho Homestead is an independent, nongovernmental, nonprofit organization founded by five siblings who inherited farmland from their late father. The organization's mission is to provide a home for the homeless and to help those in need.
+      </p>
+      <p>
+        The inspiration for Jericho Homestead began with a powerful dream one of the siblings had at the age of 11. In the dream, he encountered an elderly man who resembled a beggar. The boy asked, "Where are you going?" The man responded, "I have nowhere to go." He then collapsed into the boy's arms and passed away.
+      </p>
+
+      <div class="about-highlight">
+        Perplexed and moved, the boy pointed to his family's land and declared in his dream:<br>
+        "When I am older, I will build a home for the homeless."
+      </div>
+
+      <p>
+        Life went on, but the dream stayed with him. Twenty-two years later, after becoming a spiritual leader, the same dream returned—exactly as he had experienced it as a child. This powerful message reaffirmed the call to build Jericho Homestead.
+      </p>
+
+      <section class="audio-section">
+        <h2>A Song for Our Father</h2>
+        <p>This song shares the story that inspired our mission, honoring the legacy of our beloved father.</p>
+        <audio controls>
+          <source src="{{ url_for('static', path='/audio/The House of Mary and Joseph.mp3') }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </section>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+  </footer>
+</body>
+</html>

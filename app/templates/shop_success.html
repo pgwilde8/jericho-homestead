@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Success | House of Mary & Joseph</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <style>
+    .success-section {
+      padding: 5rem 10%;
+      text-align: center;
+      background: #f7fafc;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 3rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: #48bb78;
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      color: white;
+    }
+
+    h1 {
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-message {
+      color: #4a5568;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .order-number {
+      background: #edf2f7;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+      font-family: monospace;
+      font-size: 1.1rem;
+    }
+
+    .back-button {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+
+    .back-button:hover {
+      background: #1a365d;
+    }
+
+    footer {
+      background: #1a365d;
+      color: var(--light);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <section class="success-section">
+    <div class="success-content">
+      <div class="success-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h1>Thank You for Your Purchase!</h1>
+      <p class="success-message">
+        Your order has been successfully processed. You will receive an email confirmation shortly with your order details.
+      </p>
+      <div class="order-number">
+        Order #: {{ session_id if session_id else 'N/A' }}
+      </div>
+      <a href="{{ url_for('shop') }}" class="back-button">Return to Shop</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+  </footer>
+</body>
+</html> 

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | House of Mary & Joseph</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2c5282;
+      --light: #f7fafc;
+    }
+
+    .gallery {
+      padding: 5rem 10%;
+      background: var(--light);
+      text-align: center;
+    }
+
+    .gallery h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.5rem;
+    }
+
+    .img-wrapper img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .img-wrapper img:hover {
+      transform: scale(1.02);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .lightbox.show {
+      display: flex;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      font-size: 2.5rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    #prev { left: 5%; }
+    #next { right: 5%; }
+
+    @media (max-width: 1200px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+  <main>
+    <section class="gallery">
+      <h2>Our Gallery</h2>
+      <hr style="border:none;height:4px;background:var(--primary);width:60px;margin:1.5rem auto 2.5rem auto;">
+  
+      <!-- Row 1 -->
+      <div class="gallery-grid">
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho13.png') }}" alt="Gallery Image 1" onclick="openLightboxWithIndex(0)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho2.png') }}" alt="Gallery Image 2" onclick="openLightboxWithIndex(1)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho3.png') }}" alt="Gallery Image 3" onclick="openLightboxWithIndex(2)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho4.png') }}" alt="Gallery Image 4" onclick="openLightboxWithIndex(3)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho5.png') }}" alt="Gallery Image 5" onclick="openLightboxWithIndex(4)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho6.png') }}" alt="Gallery Image 6" onclick="openLightboxWithIndex(5)">
+        </div>
+      </div>
+  
+      <hr style="margin: 3rem auto; width: 100px; border: 2px solid var(--primary);">
+  
+      <!-- Row 2 -->
+      <div class="gallery-grid">
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho16.png') }}" alt="Gallery Image 7" onclick="openLightboxWithIndex(6)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho17.png') }}" alt="Gallery Image 8" onclick="openLightboxWithIndex(7)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho14.png') }}" alt="Gallery Image 9" onclick="openLightboxWithIndex(8)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho10.png') }}" alt="Gallery Image 10" onclick="openLightboxWithIndex(9)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho15.png') }}" alt="Gallery Image 11" onclick="openLightboxWithIndex(10)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho11.png') }}" alt="Gallery Image 12" onclick="openLightboxWithIndex(11)">
+        </div>
+      </div>
+  
+      <hr style="margin: 3rem auto; width: 100px; border: 2px solid var(--primary);">
+  
+      <!-- Row 3 -->
+      <div class="gallery-grid">
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho13.png') }}" alt="Gallery Image 13" onclick="openLightboxWithIndex(12)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho14.png') }}" alt="Gallery Image 14" onclick="openLightboxWithIndex(13)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho15.png') }}" alt="Gallery Image 15" onclick="openLightboxWithIndex(14)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho16.png') }}" alt="Gallery Image 16" onclick="openLightboxWithIndex(15)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho17.png') }}" alt="Gallery Image 17" onclick="openLightboxWithIndex(16)">
+        </div>
+        <div class="img-wrapper">
+          <img src="{{ url_for('static', path='/images/gallery/jericho-done1.png') }}" alt="Gallery Image 18" onclick="openLightboxWithIndex(17)">
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button id="prev" class="lightbox-nav">‹</button>
+    <img id="lightbox-img" src="" alt="Gallery Image" />
+    <button id="next" class="lightbox-nav">›</button>
+  </div>
+
+  <script>
+    const galleryImgs = Array.from(document.querySelectorAll('.gallery-grid img'));
+    let currentImageIndex = -1;
+
+    function openLightboxWithIndex(index) {
+      currentImageIndex = index;
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = galleryImgs[index].src;
+      lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('show');
+    }
+
+    document.getElementById('prev').onclick = (e) => {
+      e.stopPropagation();
+      if (currentImageIndex > 0) {
+        openLightboxWithIndex(currentImageIndex - 1);
+      }
+    };
+
+    document.getElementById('next').onclick = (e) => {
+      e.stopPropagation();
+      if (currentImageIndex < galleryImgs.length - 1) {
+        openLightboxWithIndex(currentImageIndex + 1);
+      }
+    };
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') document.getElementById('prev').click();
+      if (e.key === 'ArrowRight') document.getElementById('next').click();
+    });
+  </script>
+</body>
+</html>

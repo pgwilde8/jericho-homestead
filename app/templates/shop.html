@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop | House of Mary & Joseph</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <!-- Add Stripe.js -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    .shop-section {
+      padding: 5rem 10%;
+      background: #edf2f7;
+    }
+
+    .shop-section h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .shop-section p {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+      font-size: 1.1rem;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      width: 235px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-card h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    .cta-button {
+      font-size: 0.95rem;
+      padding: 0.7rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #1a365d;
+    }
+
+    .loading {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    footer {
+      background: #1a365d;
+      color: var(--light);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <section class="shop-section">
+    <h2>Our Featured Products</h2>
+    <p>Browse our exclusive line of mission-inspired apparel. More products coming soon!</p>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="{{ url_for('static', path='/images/tshirt1.png') }}" alt="Hope T-shirt" />
+        <h3>Hope T-shirt</h3>
+        <p class="price">$20.00</p>
+        <button 
+          class="cta-button"
+          onclick="handleBuyNow('prod_SfriE4FcHrXUfQ', 'price_1RkVyyRuWt0XQyQL0ETrVuX4')"
+        >
+          Buy Now
+        </button>
+      </div>
+
+      <div class="product-card">
+        <img src="{{ url_for('static', path='/images/tshirt2.png') }}" alt="Faith T-shirt" />
+        <h3>Faith T-shirt</h3>
+        <p class="price">$25.00</p>
+        <button class="cta-button" disabled>Coming Soon</button>
+      </div>
+
+      <div class="product-card placeholder">
+        <div class="placeholder-box">More items coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+  </footer>
+
+  <script>
+    // Initialize Stripe
+    const stripe = Stripe('pk_test_51RkVy0RuWt0XQyQLT3DHFcQN8AfhAUal9RNB77SbE6PdiE69Mzc94q4Ue9WbMc7ng7rSppjiO4NB1APcr4Q95a2500gkYIDLp1');
+
+    async function handleBuyNow(productId, priceId) {
+      try {
+        // Disable the button and show loading state
+        const button = event.target;
+        button.disabled = true;
+        button.classList.add('loading');
+        button.textContent = 'Processing...';
+
+        // Create checkout session
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            price_id: priceId,
+            product_id: productId
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const session = await response.json();
+
+        // Redirect to Stripe Checkout
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id
+        });
+
+        if (result.error) {
+          throw new Error(result.error.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again.');
+        
+        // Reset button state
+        button.disabled = false;
+        button.classList.remove('loading');
+        button.textContent = 'Buy Now';
+      }
+    }
+  </script>
+</body>
+</html>

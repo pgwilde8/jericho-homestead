@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | House of Mary & Joseph</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <style>
+    .contact-section {
+      padding: 5rem 10%;
+      background: #f7fafc;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-main);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2b6cb0;
+    }
+
+    footer {
+      background: ##1c30a3;
+      color: var(--light);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <div style="text-align:center; padding-top:2rem;">
+    <img src="{{ url_for('static', path='/images/JH-logo-2.jpeg') }}" alt="Jericho Homestead Logo" style="max-width:240px; width:100%; height:auto;">
+  </div>
+
+  <section class="contact-section">
+    <h2>Send Us a Message</h2>
+    <p>Please fill out the form below and we'll get back to you as soon as possible.</p>
+
+    <form action="mailto:techsmartmarketing8@gmail.com" method="POST" enctype="text/plain">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+  </footer>
+</body>
+</html>

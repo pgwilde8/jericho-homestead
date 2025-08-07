@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House of Mary & Joseph</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <style>
+    /* Modern CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Variables */
+    :root {
+      --primary: #2c5282;
+      --secondary: #e53e3e;
+      --accent: #f6ad55;
+      --text: #2d3748;
+      --light: #f7fafc;
+      --font-main: 'Montserrat', sans-serif;
+      --font-heading: 'Playfair Display', serif;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap');
+
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      color: var(--primary);
+    }
+
+    .intro {
+      padding: 5rem 10%;
+      text-align: center;
+      background: var(--light);
+    }
+
+    .intro h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro p {
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+      font-size: 1.1rem;
+    }
+
+    .intro-image {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .stats {
+      padding: 5rem 10%;
+      text-align: center;
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .stats h3 {
+      color: var(--light);
+      font-size: 1.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .stats ul {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .stats li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stats strong {
+      font-size: 2.5rem;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background: #1a365d;
+      color: var(--light);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .stats ul {
+        gap: 2rem;
+      }
+
+      .stats strong {
+        font-size: 2rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro, .stats {
+      animation: fadeIn 1s ease-out;
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <section class="intro">
+    <h2>Our Mission</h2>
+    <p>Mission Appeal 
+      July 5th and 6th 2025. 
+      
+      House of Mary and Joseph, located in Kerala, India is to provide basic needs for the homeless and to sponsor the education for the poor and marginalized. St Theresa once said ”If you can't feed 100 people, then feed one”.
+      
+      The foundation Jericho Homestead Inc, is federally tax exempt, and its main purpose is to support, House of Mary and Joseph. Please keep this project in your prayers and support this genuine cause.You and your family will be remembered in masses and prayers 
+      
+      Yours in Christ,
+      
+      Fr. Daison Areepparampil
+      
+      The House of Mary and Joseph Founder.
+      </p>
+    <img src="{{ url_for('static', path='/images/JH-logo-2.jpeg') }}" 
+         alt="Jericho Homestead Mission Site" 
+         class="intro-image" />
+  </section>
+
+  <section class="cta-banner">
+    <h3>Your Gift Today Builds a Home Tomorrow</h3>
+    <p>$35 feeds an elder for a week • $120 funds a child’s semester • $1,500 frames a bedroom</p>
+    <a class="cta-btn" href="{{ url_for('donate') }}">Donate Now</a>
+  </section>
+
+  <footer>
+    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+  </footer>
+</body>
+</html>

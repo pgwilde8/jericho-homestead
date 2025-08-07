@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Cancelled | House of Mary & Joseph</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <style>
+    .cancel-section {
+      padding: 5rem 10%;
+      text-align: center;
+      background: #f7fafc;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cancel-content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 3rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .cancel-icon {
+      width: 80px;
+      height: 80px;
+      background: #e53e3e;
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cancel-icon svg {
+      width: 40px;
+      height: 40px;
+      color: white;
+    }
+
+    h1 {
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cancel-message {
+      color: #4a5568;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .try-again-button {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+
+    .try-again-button:hover {
+      background: #1a365d;
+    }
+
+    .contact-button {
+      background: transparent;
+      color: var(--primary);
+      padding: 0.75rem 2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      border: 2px solid var(--primary);
+      transition: all 0.3s;
+    }
+
+    .contact-button:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    footer {
+      background: #1a365d;
+      color: var(--light);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <section class="cancel-section">
+    <div class="cancel-content">
+      <div class="cancel-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </div>
+      <h1>Order Cancelled</h1>
+      <p class="cancel-message">
+        Your order has been cancelled. If you experienced any issues during checkout, please don't hesitate to contact us for assistance.
+      </p>
+      <div class="button-group">
+        <a href="{{ url_for('shop') }}" class="try-again-button">Try Again</a>
+        <a href="{{ url_for('contact') }}" class="contact-button">Contact Support</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+  </footer>
+</body>
+</html> 

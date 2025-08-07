@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Outreach | Jericho Homestead</title>
+  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <style>
+    .intro {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      background: #edf2f7;
+      padding: 4rem 10%;
+    }
+
+    .intro-text {
+      flex: 1 1 320px;
+    }
+
+    .intro-text h1 {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .intro-text p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #4a5568;
+      max-width: 600px;
+    }
+
+    .intro-img {
+      flex: 0 1 260px;
+      text-align: center;
+    }
+
+    .intro-img img {
+      max-width: 260px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .programs {
+      padding: 5rem 10%;
+      background: var(--light);
+    }
+
+    .programs h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-family: var(--font-heading);
+      color: var(--primary);
+      margin-bottom: 3rem;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .program-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .program-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .program-card h3 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .program-card p {
+      font-size: 0.95rem;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .cta {
+      background: var(--primary);
+      color: #f7fafc;
+      text-align: center;
+      padding: 4rem 10%;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      font-family: var(--font-heading);
+      margin-bottom: 1rem;
+    }
+
+    .cta p { max-width: 700px; margin: 0 auto 2rem auto; }
+
+    .cta a {
+      background: var(--secondary);
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .cta a:hover { background: #c53030; }
+
+    footer {
+      background: #1a365d;
+      color: #f7fafc;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <!-- Hero Section -->
+  <section class="intro">
+    <div class="intro-text">
+      <h1>Community Outreach</h1>
+      <p>Jericho Homestead empowers India’s homeless—elders and youth alike—through targeted programs that break the cycle of poverty and build sustainable futures.</p>
+    </div>
+    <div class="intro-img">
+      <img src="{{ url_for('static', path='/images/JH-logo-2.jpeg') }}" alt="Jericho Homestead Logo">
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section class="programs">
+    <h2>Our Comprehensive Programs</h2>
+    <div class="program-grid">
+      <div class="program-card">
+        <h3>Hunger Prevention Programs</h3>
+        <p>Daily meal distributions and nutrition education ensure no one goes to bed hungry.</p>
+      </div>
+      <div class="program-card">
+        <h3>Housing Programs</h3>
+        <p>We build and staff safe, secure homes that provide dignity and stability.</p>
+      </div>
+      <div class="program-card">
+        <h3>Stability Programs</h3>
+        <p>Counseling, healthcare access, and life-skills training help individuals regain self-sufficiency.</p>
+      </div>
+      <div class="program-card">
+        <h3>Educational Programs</h3>
+        <p>Schooling support, tutoring, and vocational training open doors for children and adults alike.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guiding Light Section -->
+  <section class="programs" style="background:#fff;">
+    <h2>A Guiding Light for the Less Fortunate</h2>
+    <p style="max-width:800px;margin:0 auto 3rem auto;font-size:1.05rem;line-height:1.8;color:#4a5568;">Since 2018 our dedicated staff has provided education, clothing, and food to students from low-income households. Our tools and programs equip them with the skills they need to thrive and build sustainable livelihoods.</p>
+    <div style="text-align:center;">
+      <a href="{{ url_for('donate') }}" class="cta-button" style="background:var(--secondary);padding:0.8rem 2rem;border-radius:25px;color:#fff;font-weight:600;text-decoration:none;">Donate Now</a>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <h2>Join Us and Make a Difference</h2>
+    <p>Your support enables us to expand our outreach and transform more lives. Every donation—large or small—lights the way for someone in need.</p>
+    <a href="{{ url_for('contact') }}">Contact Us</a>
+  </section>
+
+  <footer>
+    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+  </footer>
+</body>
+</html>

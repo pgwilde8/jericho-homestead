@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Cancelled | House of Mary & Joseph</title>
+    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .cancel-section {
+            padding: 6rem 10%;
+            text-align: center;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cancel-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cancel-icon {
+            font-size: 4rem;
+            color: #f59e0b;
+            margin-bottom: 2rem;
+            background: white;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cancel-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cancel-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .reassurance-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .reassurance-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .alternatives-section {
+            background: white;
+            color: #1e293b;
+            padding: 4rem 10%;
+            text-align: center;
+        }
+
+        .alternatives-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1e293b;
+            font-family: var(--font-heading);
+        }
+
+        .alternatives-text {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        .alternative-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .alternative-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .alternative-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .alternative-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .alternative-text {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .alternative-link {
+            background: #667eea;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .alternative-link:hover {
+            background: #5a67d8;
+            transform: scale(1.05);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: #667eea;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .action-btn:hover {
+            background: transparent;
+            color: #667eea;
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .action-btn.secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .cancel-title {
+                font-size: 2rem;
+            }
+            
+            .alternatives-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'partials/header.html' %}
+
+    <!-- Cancel Section -->
+    <section class="cancel-section">
+        <div class="cancel-content">
+            <div class="cancel-icon">
+                <i class="fas fa-pause-circle"></i>
+            </div>
+            <h1 class="cancel-title">Donation Cancelled</h1>
+            <p class="cancel-message">
+                No worries! Your donation was cancelled and no charges were made to your account.
+            </p>
+            
+            <div class="reassurance-section">
+                <p class="reassurance-text">
+                    <strong>Your payment information was not stored</strong> and you can try again at any time.
+                </p>
+                <p class="reassurance-text">
+                    We understand that sometimes technical issues occur or you might want to reconsider your donation amount.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alternatives Section -->
+    <section class="alternatives-section">
+        <h2 class="alternatives-title">Other Ways to Help</h2>
+        <p class="alternatives-text">
+            Your support means everything to us, whether through donations or other forms of assistance. 
+            Here are several ways you can still make a meaningful impact on Father Diason's mission.
+        </p>
+        
+        <div class="alternatives-grid">
+            <div class="alternative-card">
+                <div class="alternative-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3 class="alternative-title">Try Donating Again</h3>
+                <p class="alternative-text">
+                    Ready to try again? You can return to our donation page and complete your contribution securely.
+                </p>
+                <a href="{{ url_for('donate') }}" class="alternative-link">Donate Now</a>
+            </div>
+            
+            <div class="alternative-card">
+                <div class="alternative-icon">
+                    <i class="fas fa-share"></i>
+                </div>
+                <h3 class="alternative-title">Share Our Mission</h3>
+                <p class="alternative-text">
+                    Help us reach more people by sharing our story and mission with your friends and family.
+                </p>
+                <a href="{{ url_for('community_outreach') }}" class="alternative-link">Learn More</a>
+            </div>
+            
+            <div class="alternative-card">
+                <div class="alternative-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 class="alternative-title">Stay Connected</h3>
+                <p class="alternative-text">
+                    Join our mailing list to receive updates about our programs and future opportunities to help.
+                </p>
+                <a href="{{ url_for('contact') }}" class="alternative-link">Contact Us</a>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="{{ url_for('donate') }}" class="action-btn">Try Donation Again</a>
+            <a href="{{ url_for('index') }}" class="action-btn secondary">Return Home</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+    </footer>
+</body>
+</html>

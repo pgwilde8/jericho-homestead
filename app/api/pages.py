@@ -52,6 +52,21 @@ async def community_outreach(request: Request):
 async def events(request: Request):
     return templates.TemplateResponse("events.html", {"request": request})
 
+@router.get("/teach-me-how-to-pray", response_class=HTMLResponse)
+async def teach_me_how_to_pray(request: Request):
+    return templates.TemplateResponse("Teach_Me_How_To_Pray.html", {"request": request})
+
+@router.get("/donate/success", response_class=HTMLResponse)
+async def donate_success(request: Request, session_id: str = None):
+    return templates.TemplateResponse("donate_success.html", {
+        "request": request,
+        "session_id": session_id
+    })
+
+@router.get("/donate/cancel", response_class=HTMLResponse)
+async def donate_cancel(request: Request):
+    return templates.TemplateResponse("donate_cancel.html", {"request": request})
+
 @router.get("/_da-verify-12b8085f1665b211c45e49b411b6add8.jerichohomestead.org", response_class=PlainTextResponse)
 async def domain_verification():
     return "12b8085f1665b211c45e49b411b6add8"

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teach Me How To Pray - Album Showcase | House of Mary & Joseph</title>
+    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .album-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 10%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .album-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .album-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .album-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .album-description {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .player-section {
+            background: #f8fafc;
+            padding: 4rem 10%;
+        }
+
+        .player-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .player-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .now-playing {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .current-track {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .playlist {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .track-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .track-item:hover {
+            background: #f8fafc;
+        }
+
+        .track-item.active {
+            background: #e0e7ff;
+            border-left: 4px solid #667eea;
+        }
+
+        .track-number {
+            width: 30px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .track-info {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .track-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .track-duration {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .track-play {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border: none;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .track-play:hover {
+            background: #5a67d8;
+            transform: scale(1.1);
+        }
+
+        .album-info {
+            background: white;
+            padding: 4rem 10%;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: #f8fafc;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .info-text {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 10%;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .youtube-section {
+            background: #f8fafc;
+            padding: 4rem 10%;
+        }
+
+        .youtube-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .youtube-icon {
+            font-size: 4rem;
+            color: #ff0000;
+            margin-bottom: 1.5rem;
+        }
+
+        .youtube-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            font-family: var(--font-heading);
+        }
+
+        .youtube-description {
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .youtube-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 10px;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .benefit-item i {
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .album-title {
+                font-size: 2.5rem;
+            }
+            
+            .player-controls {
+                flex-wrap: wrap;
+            }
+            
+            .track-item {
+                padding: 0.75rem 1rem;
+            }
+
+            .youtube-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .youtube-benefits {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'partials/header.html' %}
+
+    <!-- Album Hero Section -->
+    <section class="album-hero">
+        <div class="album-content">
+            <h1 class="album-title">Teach Me How To Pray</h1>
+            <p class="album-subtitle">12 Songs of Faith, Love & Hope</p>
+            <p class="album-description">
+                Your donation to the <strong>House of Mary & Joseph</strong>, founded by Catholic priest <strong>Father Diason</strong>, will help bring shelter, dignity, and hope to the homeless and vulnerable in India. 
+                In return, you'll receive an inspiring playlist of 12 AI-generated songs—from heartfelt love ballads to Christian worship and uplifting tunes—crafted to move your soul and fuel this mission of compassion.
+            </p>
+            <p class="album-description">
+                Listen to 1:30 minutes of each track below. If they touch your heart, donate to receive the full playlist. 
+                <strong>60% of proceeds go directly to the charity, and 40% support the artist behind the project.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Audio Player Section -->
+    <section class="player-section">
+        <div class="player-container">
+            <div class="player-header">
+                <div class="now-playing">Now Playing</div>
+                <div class="current-track" id="currentTrack">Loading...</div>
+                
+                <div class="player-controls">
+                    <button class="control-btn" id="prevBtn">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-btn" id="playBtn">
+                        <i class="fas fa-play" id="playIcon"></i>
+                    </button>
+                    <button class="control-btn" id="nextBtn">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span id="totalTime">0:00</span>
+                </div>
+            </div>
+            
+            <div class="playlist" id="playlist">
+                <!-- Track items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Album Information -->
+    <section class="album-info">
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3 class="info-title">12 Inspiring Tracks</h3>
+                <p class="info-text">
+                    A soulful mix of ballads, faith-inspired anthems, and uplifting melodies to calm the heart and awaken the spirit.
+                </p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3 class="info-title">Support the Less Fortunate</h3>
+                <p class="info-text">
+                    Your donation directly supports Father Diason's mission to provide shelter, 
+                    food, and hope to the homeless and vulnerable through House of Mary & Joseph.
+                </p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="info-title">Faith & Compassion</h3>
+                <p class="info-text">
+                    Experience the power of music while contributing to a cause that embodies 
+                    the teachings of Christ—loving and serving those in need.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Playlist Delivery Section -->
+    <section class="youtube-section">
+        <div class="youtube-container">
+            <div class="youtube-content">
+                <div class="youtube-icon">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <h2 class="youtube-title">Easy Access via YouTube Playlist</h2>
+                <p class="youtube-description">
+                    After your donation, you'll receive a <strong>private YouTube playlist link</strong> containing all 12 songs. 
+                    This makes it easy to listen anywhere—on your phone, computer, or smart TV—without downloading files.
+                </p>
+                <div class="youtube-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Listen on any device</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-wifi"></i>
+                        <span>No downloads needed</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-share"></i>
+                        <span>Private link for you</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-play-circle"></i>
+                        <span>High quality streaming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <h2 class="cta-title">Support the Less Fortunate Through Music</h2>
+        <p class="cta-text">
+            Your donation not only gives you beautiful music but also helps Father Diason continue his vital work 
+            serving the homeless and vulnerable. Every contribution makes a difference in someone's life.
+        </p>
+        <a href="{{ url_for('shop') }}" class="cta-button">Donate & Get Full Album</a>
+    </section>
+
+    <footer>
+        <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+    </footer>
+
+    <script>
+        // Album track data - 12 songs total
+        const tracks = [
+            {
+                id: 1,
+                title: "Teach Me How To Pray",
+                duration: "3:45",
+                audioUrl: "/static/audio/Teach Me How To Pray.mp3"
+            },
+            {
+                id: 2,
+                title: "Hail the Queen of Grace",
+                duration: "4:12",
+                audioUrl: "/static/audio/Hail the Queen of Grace.mp3"
+            },
+            {
+                id: 3,
+                title: "Love Redeems",
+                duration: "3:58",
+                audioUrl: "/static/audio/Love Redeems.mp3"
+            },
+            {
+                id: 4,
+                title: "It's In the Little Things",
+                duration: "4:25",
+                audioUrl: "/static/audio/It's In the Little Things.mp3"
+            },
+            {
+                id: 5,
+                title: "Nice To Have Your Own Song",
+                duration: "3:32",
+                audioUrl: "/static/audio/Nice To Have Your Own Song.mp3"
+            },
+            {
+                id: 6,
+                title: "My Forever",
+                duration: "4:08",
+                audioUrl: "/static/audio/My Forever.mp3"
+            },
+            {
+                id: 7,
+                title: "God Is My Refuge",
+                duration: "3:55",
+                audioUrl: "/static/audio/God Is My Refuge.mp3"
+            },
+            {
+                id: 8,
+                title: "Let The Silence Speak",
+                duration: "4:15",
+                audioUrl: "/static/audio/Let The Silence Speak.mp3"
+            },
+            {
+                id: 9,
+                title: "Stay With ME",
+                duration: "3:48",
+                audioUrl: "/static/audio/Stay With ME.mp3"
+            },
+            {
+                id: 10,
+                title: "Time Flies",
+                duration: "4:02",
+                audioUrl: "/static/audio/Time Flies.mp3"
+            },
+            {
+                id: 11,
+                title: "Today is a Good Day",
+                duration: "3:50",
+                audioUrl: "/static/audio/Today is a Good Day.mp3"
+            },
+            {
+                id: 12,
+                title: "I Was Blind, But Now I See",
+                duration: "4:10",
+                audioUrl: "/static/audio/I Was Blind, But Now I See.mp3"
+            }
+        ];
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+        let audio = new Audio();
+
+        // Initialize the player
+        function initPlayer() {
+            populatePlaylist();
+            loadTrack(0);
+            
+            // Set up audio event listeners
+            audio.addEventListener('loadedmetadata', updateTotalTime);
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', nextTrack);
+            audio.addEventListener('play', () => {
+                isPlaying = true;
+                updatePlayButton();
+            });
+            audio.addEventListener('pause', () => {
+                isPlaying = false;
+                updatePlayButton();
+            });
+            audio.addEventListener('error', (e) => {
+                console.error('Audio error:', e);
+                document.getElementById('currentTrack').textContent = 'Audio file not found - Please upload your tracks';
+            });
+        }
+
+        // Populate the playlist
+        function populatePlaylist() {
+            const playlist = document.getElementById('playlist');
+            playlist.innerHTML = '';
+            
+            tracks.forEach((track, index) => {
+                const trackItem = document.createElement('div');
+                trackItem.className = 'track-item';
+                trackItem.innerHTML = `
+                    <div class="track-number">${track.id}</div>
+                    <div class="track-info">
+                        <div class="track-title">${track.title}</div>
+                        <div class="track-duration">${track.duration}</div>
+                    </div>
+                    <button class="track-play" onclick="playTrack(${index})">
+                        <i class="fas fa-play"></i>
+                    </button>
+                `;
+                playlist.appendChild(trackItem);
+            });
+        }
+
+        // Load a track
+        function loadTrack(index) {
+            currentTrackIndex = index;
+            const track = tracks[index];
+            
+            document.getElementById('currentTrack').textContent = track.title;
+            document.getElementById('currentTime').textContent = '0:00';
+            document.getElementById('totalTime').textContent = '0:00';
+            document.getElementById('progressBar').style.width = '0%';
+            
+            // Show loading state
+            document.getElementById('currentTrack').textContent = 'Loading...';
+            
+            audio.src = track.audioUrl;
+            
+            // Update active track in playlist
+            updateActiveTrack();
+        }
+
+        // Play/pause functionality
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+        }
+
+        // Play specific track
+        function playTrack(index) {
+            if (currentTrackIndex !== index) {
+                loadTrack(index);
+            }
+            audio.play();
+        }
+
+        // Next track
+        function nextTrack() {
+            const nextIndex = (currentTrackIndex + 1) % tracks.length;
+            loadTrack(nextIndex);
+            if (isPlaying) {
+                audio.play();
+            }
+        }
+
+        // Previous track
+        function prevTrack() {
+            const prevIndex = currentTrackIndex === 0 ? tracks.length - 1 : currentTrackIndex - 1;
+            loadTrack(prevIndex);
+            if (isPlaying) {
+                audio.play();
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            const currentTime = formatTime(audio.currentTime);
+            document.getElementById('currentTime').textContent = currentTime;
+        }
+
+        // Update total time
+        function updateTotalTime() {
+            const totalTime = formatTime(audio.duration);
+            document.getElementById('totalTime').textContent = totalTime;
+        }
+
+        // Format time
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Update play button
+        function updatePlayButton() {
+            const playIcon = document.getElementById('playIcon');
+            playIcon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+        }
+
+        // Update active track in playlist
+        function updateActiveTrack() {
+            const trackItems = document.querySelectorAll('.track-item');
+            trackItems.forEach((item, index) => {
+                item.classList.toggle('active', index === currentTrackIndex);
+            });
+        }
+
+        // Event listeners
+        document.getElementById('playBtn').addEventListener('click', togglePlay);
+        document.getElementById('nextBtn').addEventListener('click', nextTrack);
+        document.getElementById('prevBtn').addEventListener('click', prevTrack);
+
+        // Initialize player when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initPlayer();
+            
+            // Enhanced autoplay with multiple interaction points
+            function attemptAutoplay() {
+                if (!isPlaying && audio.readyState >= 2) {
+                    audio.play().catch(function(error) {
+                        console.log('Autoplay prevented:', error);
+                        // Show a message to encourage user interaction
+                        document.getElementById('currentTrack').textContent = 'Click play to start listening';
+                    });
+                }
+            }
+            
+            // Try autoplay on various user interactions
+            document.addEventListener('click', attemptAutoplay, { once: true });
+            document.addEventListener('touchstart', attemptAutoplay, { once: true });
+            document.addEventListener('keydown', attemptAutoplay, { once: true });
+            
+            // Also try autoplay when audio is loaded
+            audio.addEventListener('canplaythrough', function() {
+                // Small delay to ensure everything is ready
+                setTimeout(attemptAutoplay, 100);
+            });
+        });
+    </script>
+</body>
+</html>

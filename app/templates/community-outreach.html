@@ -1,187 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Community Outreach | Jericho Homestead</title>
-  <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
-  <style>
-    .intro {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      background: #edf2f7;
-      padding: 4rem 10%;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Outreach - House of Mary & Joseph</title>
+    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 10%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .intro-text {
-      flex: 1 1 320px;
-    }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
 
-    .intro-text h1 {
-      font-family: var(--font-heading);
-      font-size: 2.3rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
 
-    .intro-text p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: #4a5568;
-      max-width: 600px;
-    }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
 
-    .intro-img {
-      flex: 0 1 260px;
-      text-align: center;
-    }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
 
-    .intro-img img {
-      max-width: 260px;
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
+        .hero-description {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
 
-    .programs {
-      padding: 5rem 10%;
-      background: var(--light);
-    }
+        .stats-section {
+            background: white;
+            padding: 4rem 10%;
+        }
 
-    .programs h2 {
-      text-align: center;
-      font-size: 2rem;
-      font-family: var(--font-heading);
-      color: var(--primary);
-      margin-bottom: 3rem;
-    }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .program-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: #f8fafc;
+            transition: transform 0.3s ease;
+        }
 
-    .program-card {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.3s;
-    }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
 
-    .program-card:hover {
-      transform: translateY(-4px);
-    }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
 
-    .program-card h3 {
-      margin-bottom: 1rem;
-      color: var(--primary);
-    }
+        .stat-label {
+            font-size: 1.2rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
 
-    .program-card p {
-      font-size: 0.95rem;
-      color: #4a5568;
-      line-height: 1.6;
-    }
+        .mission-section {
+            background: #f8fafc;
+            padding: 4rem 10%;
+        }
 
-    .cta {
-      background: var(--primary);
-      color: #f7fafc;
-      text-align: center;
-      padding: 4rem 10%;
-    }
+        .mission-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    .cta h2 {
-      font-size: 2rem;
-      font-family: var(--font-heading);
-      margin-bottom: 1rem;
-    }
+        .mission-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e293b;
+            font-family: var(--font-heading);
+        }
 
-    .cta p { max-width: 700px; margin: 0 auto 2rem auto; }
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
 
-    .cta a {
-      background: var(--secondary);
-      padding: 0.8rem 2rem;
-      border-radius: 25px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
+        .mission-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #475569;
+        }
 
-    .cta a:hover { background: #c53030; }
+        .mission-text h3 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
 
-    footer {
-      background: #1a365d;
-      color: #f7fafc;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-    }
-  </style>
+        .mission-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-image {
+            text-align: center;
+        }
+
+        .mission-icon {
+            font-size: 8rem;
+            color: #667eea;
+            opacity: 0.8;
+        }
+
+        .programs-section {
+            background: white;
+            padding: 4rem 10%;
+        }
+
+        .programs-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e293b;
+            font-family: var(--font-heading);
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-card {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .program-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .program-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .program-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .impact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 10%;
+            text-align: center;
+        }
+
+        .impact-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-family: var(--font-heading);
+        }
+
+        .impact-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            font-size: 1.1rem;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .contact-section {
+            background: #f8fafc;
+            padding: 4rem 10%;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .contact-text {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .contact-button {
+            background: #667eea;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .contact-button:hover {
+            background: transparent;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .mission-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  {% include 'partials/header.html' %}
+    {% include 'partials/header.html' %}
 
-  <!-- Hero Section -->
-  <section class="intro">
-    <div class="intro-text">
-      <h1>Community Outreach</h1>
-      <p>Jericho Homestead empowers India’s homeless—elders and youth alike—through targeted programs that break the cycle of poverty and build sustainable futures.</p>
-    </div>
-    <div class="intro-img">
-      <img src="{{ url_for('static', path='/images/JH-logo-2.jpeg') }}" alt="Jericho Homestead Logo">
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Community Outreach</h1>
+            <p class="hero-subtitle">Empowering the Homeless Population in India</p>
+            <p class="hero-description">
+                Since 2018, Jericho Homestead has been a guiding light for the less fortunate, 
+                providing comprehensive support to break the cycle of poverty and create sustainable change.
+            </p>
+        </div>
+    </section>
 
-  <!-- Programs Section -->
-  <section class="programs">
-    <h2>Our Comprehensive Programs</h2>
-    <div class="program-grid">
-      <div class="program-card">
-        <h3>Hunger Prevention Programs</h3>
-        <p>Daily meal distributions and nutrition education ensure no one goes to bed hungry.</p>
-      </div>
-      <div class="program-card">
-        <h3>Housing Programs</h3>
-        <p>We build and staff safe, secure homes that provide dignity and stability.</p>
-      </div>
-      <div class="program-card">
-        <h3>Stability Programs</h3>
-        <p>Counseling, healthcare access, and life-skills training help individuals regain self-sufficiency.</p>
-      </div>
-      <div class="program-card">
-        <h3>Educational Programs</h3>
-        <p>Schooling support, tutoring, and vocational training open doors for children and adults alike.</p>
-      </div>
-    </div>
-  </section>
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">0.15%</div>
+                <div class="stat-label">Population Experiencing Homelessness</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2018</div>
+                <div class="stat-label">Year Founded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Core Programs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Dedicated Staff</div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Guiding Light Section -->
-  <section class="programs" style="background:#fff;">
-    <h2>A Guiding Light for the Less Fortunate</h2>
-    <p style="max-width:800px;margin:0 auto 3rem auto;font-size:1.05rem;line-height:1.8;color:#4a5568;">Since 2018 our dedicated staff has provided education, clothing, and food to students from low-income households. Our tools and programs equip them with the skills they need to thrive and build sustainable livelihoods.</p>
-    <div style="text-align:center;">
-      <a href="{{ url_for('donate') }}" class="cta-button" style="background:var(--secondary);padding:0.8rem 2rem;border-radius:25px;color:#fff;font-weight:600;text-decoration:none;">Donate Now</a>
-    </div>
-  </section>
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="mission-container">
+            <h2 class="mission-title">Our Mission</h2>
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h3>A Guiding Light for the Less Fortunate</h3>
+                    <p>
+                        Jericho Homestead is here to empower the homeless population in India. With an average of 0.15% of the population experiencing homelessness, we recognize the urgency to address this issue. Our community outreach programs aim to provide humanitarian efforts for the elderly and young homeless individuals.
+                    </p>
+                    <p>
+                        Our organization has been operating since 2018, and our staff is dedicated to helping students from low-income households who don't receive adequate resources. We provide education, clothing, and food to help move the less fortunate out of poverty and lead a more sustainable lifestyle.
+                    </p>
+                    <p>
+                        At Jericho Homestead, we believe in being a guiding light for the less fortunate. Our available programs and tools are designed to teach them the skills they need to succeed.
+                    </p>
+                </div>
+                <div class="mission-image">
+                    <div class="mission-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Call to Action -->
-  <section class="cta">
-    <h2>Join Us and Make a Difference</h2>
-    <p>Your support enables us to expand our outreach and transform more lives. Every donation—large or small—lights the way for someone in need.</p>
-    <a href="{{ url_for('contact') }}">Contact Us</a>
-  </section>
+    <!-- Programs Section -->
+    <section class="programs-section">
+        <h2 class="programs-title">Our Comprehensive Programs</h2>
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3 class="program-title">Hunger Prevention Programs</h3>
+                <p class="program-description">
+                    Providing nutritious meals and food security to ensure no one goes hungry. We work to address immediate hunger needs while building long-term food security solutions.
+                </p>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3 class="program-title">Housing Programs</h3>
+                <p class="program-description">
+                    Building and staffing homes to offer the homeless a safe and secure environment. We provide shelter and create stable living conditions for those in need.
+                </p>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="program-title">Stability Programs</h3>
+                <p class="program-description">
+                    Teaching essential life skills such as accessing health services and becoming self-sufficient in providing for their families. We focus on creating lasting stability.
+                </p>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="program-title">Educational Programs</h3>
+                <p class="program-description">
+                    Providing education, clothing, and resources to help students from low-income households succeed academically and build a brighter future.
+                </p>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
-  </footer>
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <h2 class="impact-title">Breaking the Cycle of Poverty</h2>
+        <p class="impact-text">
+            Through our community outreach initiatives, we strive to break the cycle of poverty and create a brighter future for those in need. By building and staffing homes, we offer the homeless a safe and secure environment while teaching them the skills they need to succeed.
+        </p>
+        <a href="{{ url_for('donate') }}" class="cta-button">Join Us Now and Donate</a>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2 class="contact-title">Learn More About Our Programs</h2>
+        <p class="contact-text">
+            For more information about our programs, contact us. We'd love to tell you all about them and how you can get involved in making a difference.
+        </p>
+        <a href="{{ url_for('contact') }}" class="contact-button">Contact Us</a>
+    </section>
+
+    <footer>
+        <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
+    </footer>
 </body>
 </html>

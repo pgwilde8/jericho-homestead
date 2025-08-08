@@ -6,6 +6,7 @@
   <title>Events | Jericho Homestead</title>
   <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     /* Intro (shared hero) */
     .intro {
@@ -25,6 +26,38 @@
     .event-card h3{color:var(--primary);margin-bottom:.5rem;}
     .event-card .date{color:var(--secondary);font-weight:600;margin-bottom:.5rem;}
     .event-card p{font-size:.95rem;color:#4a5568;line-height:1.6;}
+
+    .no-events-message{
+      text-align:center;
+      max-width:600px;
+      margin:0 auto;
+      padding:3rem 2rem;
+      background:#f7fafc;
+      border-radius:15px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+    .no-events-icon{
+      font-size:4rem;
+      color:#cbd5e0;
+      margin-bottom:1.5rem;
+    }
+    .no-events-message h3{
+      color:var(--primary);
+      font-size:1.8rem;
+      margin-bottom:1rem;
+      font-family:var(--font-heading);
+    }
+    .no-events-message p{
+      font-size:1.1rem;
+      color:#4a5568;
+      line-height:1.6;
+      margin-bottom:1rem;
+    }
+    .update-message{
+      color:var(--secondary);
+      font-weight:600;
+      font-style:italic;
+    }
 
     .cta-events{text-align:center;padding:4rem 10%;background:var(--primary);color:#f7fafc;}
     .cta-events h2{font-family:var(--font-heading);font-size:2rem;margin-bottom:1rem;}
@@ -51,29 +84,17 @@
   <section class="events-section">
     <h2>Upcoming Events</h2>
 
-    <div class="event-grid">
-      <!-- Sample event card -->
-      <div class="event-card">
-        <div class="date">Aug&nbsp;24&nbsp;2025</div>
-        <h3>Community Meal Drive</h3>
-        <p>Help us prepare and distribute 500 hot meals to elders living on the streets of Kochi.</p>
+    <div class="no-events-message">
+      <div class="no-events-icon">
+        <i class="fas fa-calendar-alt"></i>
       </div>
-
-      <div class="event-card">
-        <div class="date">Sep&nbsp;12&nbsp;2025</div>
-        <h3>Back-to-School Kit Assembly</h3>
-        <p>Join volunteers assembling backpacks filled with supplies for children in our education program.</p>
-      </div>
-
-      <div class="event-card">
-        <div class="date">Oct&nbsp;4&nbsp;2025</div>
-        <h3>Fundraising Gala</h3>
-        <p>An evening of music, dinner, and testimony celebrating progress and raising funds for new housing units.</p>
-      </div>
+      <h3>No Events Currently Scheduled</h3>
+      <p>We don't have any events planned at the moment, but we're working on organizing meaningful opportunities for you to get involved with our mission. Please check back soon for updates!</p>
+      <p class="update-message">We'll be announcing new events and volunteer opportunities in the coming weeks.</p>
     </div>
 
-    <p style="margin-top:2rem;font-weight:600;color:#2d3748;">Join Us...</p>
-    <p style="font-size:0.95rem;color:#4a5568;">Questions about upcoming events? Please contact Mary at <a href="tel:7327848284" style="color:var(--secondary);text-decoration:none;">732-784-8284</a></p>
+    <p style="margin-top:2rem;font-weight:600;color:#2d3748;">Stay Connected...</p>
+    <p style="font-size:0.95rem;color:#4a5568;">Want to be notified about future events? Please <a href="{{ url_for('contact') }}" style="color:var(--secondary);text-decoration:none;">contact us</a> to join our mailing list.</p>
   </section>
 
   <section class="cta-events">

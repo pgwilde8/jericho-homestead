@@ -40,7 +40,7 @@ class Order(Base):
 class Donation(Base):
     __tablename__ = "donations"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)  # Allow guest donations
     amount = Column(Float, nullable=False)
     message = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)

@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teach Me How To Pray - Album Showcase | House of Mary & Joseph</title>
-    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/footer.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .album-hero {
@@ -387,7 +388,7 @@
                 In return, you'll receive an inspiring playlist of 12 AI-generated songs—from heartfelt love ballads to Christian worship and uplifting tunes—crafted to move your soul and fuel this mission of compassion.
             </p>
             <p class="album-description">
-                Listen to 1:30 minutes of each track below. If they touch your heart, donate to receive the full playlist. 
+                If they touch your heart, donate to receive the full playlist. 
                 <strong>60% of proceeds go directly to the charity, and 40% support the artist behind the project.</strong>
             </p>
         </div>
@@ -761,5 +762,7 @@
             });
         });
     </script>
+    
+    {% include 'partials/footer.html' %}
 </body>
 </html>

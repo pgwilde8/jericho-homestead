@@ -6,6 +6,7 @@
   <title>Donate | House of Mary & Joseph</title>
   <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/footer.css') }}" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     .donate-section {
@@ -165,7 +166,7 @@
   </style>
 </head>
 <body>
-  {% include 'partials/header.html' %}
+  {% include 'partials/header_donate.html' %}
 
   <section class="donate-section">
     <h2>Help Build Homes for the Forgotten</h2>
@@ -200,9 +201,7 @@
     </div>
   </section>
 
-  <footer>
-    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
-  </footer>
+  {% include 'partials/footer.html' %}
 
   <script>
     // Set donation amount from preset buttons

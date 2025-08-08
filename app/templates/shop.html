@@ -6,6 +6,7 @@
   <title>Shop | House of Mary & Joseph</title>
   <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/footer.css') }}" rel="stylesheet">
   <!-- Add Stripe.js -->
   <script src="https://js.stripe.com/v3/"></script>
   <style>
@@ -109,7 +110,7 @@
   </style>
 </head>
 <body>
-  {% include 'partials/header.html' %}
+  {% include 'partials/header_shop.html' %}
 
   <section class="shop-section">
     <h2>Our Featured Products</h2>
@@ -141,9 +142,7 @@
     </div>
   </section>
 
-  <footer>
-    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
-  </footer>
+  {% include 'partials/footer.html' %}
 
   <script>
     // Initialize Stripe

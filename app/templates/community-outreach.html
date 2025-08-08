@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Outreach - House of Mary & Joseph</title>
-    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/footer.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .hero-section {
@@ -291,10 +292,89 @@
                 gap: 1.5rem;
             }
         }
+
+        /* Small grey header with donate button */
+        .donate-header {
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 0;
+        }
+
+        .donate-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .donate-text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .donate-title {
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-heading);
+        }
+
+        .donate-subtitle {
+            color: #4a5568;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .donate-header-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .donate-header-btn:hover {
+            background: #c53030;
+        }
+
+        @media (max-width: 768px) {
+            .donate-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .donate-title {
+                font-size: 0.95rem;
+            }
+            
+            .donate-subtitle {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-    {% include 'partials/header.html' %}
+    {% include 'partials/header_community_outreach.html' %}
+
+    <!-- Small grey header with donate button -->
+    <div class="donate-header">
+      <div class="donate-header-content">
+        <div class="donate-text-content">
+          <div class="donate-title">Donate To The House Of Mary & Joseph</div>
+          <div class="donate-subtitle"></div>
+        </div>
+        <a href="{{ url_for('donate') }}" class="donate-header-btn">Donate Now</a>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -420,8 +500,6 @@
         <a href="{{ url_for('contact') }}" class="contact-button">Contact Us</a>
     </section>
 
-    <footer>
-        <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
-    </footer>
+    {% include 'partials/footer.html' %}
 </body>
 </html>

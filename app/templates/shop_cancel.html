@@ -6,6 +6,7 @@
   <title>Order Cancelled | House of Mary & Joseph</title>
   <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', path='/css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', path='/css/footer.css') }}" rel="stylesheet">
   <style>
     .cancel-section {
       padding: 5rem 10%;
@@ -122,8 +123,6 @@
     </div>
   </section>
 
-  <footer>
-    <p>© 2025 House of Mary & Joseph | Jericho Homestead</p>
-  </footer>
+  {% include 'partials/footer.html' %}
 </body>
 </html> 

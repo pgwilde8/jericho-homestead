@@ -1,0 +1,29 @@
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>House of Mary & Joseph</h3>
+      <p>Building Hope for the Homeless</p>
+      <p>Supporting Father Diason's mission to help India's homeless population</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="{{ url_for('community_outreach') }}">Community Outreach</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        <li><a href="{{ url_for('shop') }}">Shop</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Support Our Mission</h3>
+      <p>Your donation helps provide shelter, food, and education to those in need.</p>
+      <a href="{{ url_for('donate') }}" class="donate-btn">Donate Now</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 House of Mary & Joseph. All rights reserved.</p>
+  </div>
+</footer>
